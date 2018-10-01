@@ -1,0 +1,74 @@
+buildscript {
+
+    ext.versions = [
+            'minSdk'                : 14,
+            'compileSdk'            : 28,
+
+            'android_plugin_version': '3.2.0',
+            'kotlin_plugin_version' : '1.2.71',
+
+            'supportLibrary'        : '28.0.0',
+    ]
+
+    def lifecycle_version = "1.1.1"
+
+    ext.deps = [
+            'build'   : [
+                    'gradle_plugin': "com.android.tools.build:gradle:${versions.android_plugin_version}",
+                    'kotlin_plugin': "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_plugin_version}",
+            ],
+            'kotlin'  : [
+                    'stdlib_jdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_plugin_version}",
+                    'stdlib_jdk8': "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin_plugin_version}",
+            ],
+            'auto'    : [
+                    'service': "com.google.auto.service:auto-service:1.0-rc4",
+                    'common' : "com.google.auto:auto-common:0.10",
+            ],
+            'android' : [
+                    'support'             : [
+                            'appcompat_v7': "com.android.support:appcompat-v7:${versions.supportLibrary}",
+                            'fragment'    : "com.android.support:support-fragment:${versions.supportLibrary}",
+                            'annotations' : "com.android.support:support-annotations:${versions.supportLibrary}",
+                    ],
+                    'databinding_compiler': "com.android.databinding:compiler:${versions.android_plugin_version}",
+            ],
+            'arch'    : [
+                    'lifecycle_extensions'     : "android.arch.lifecycle:extensions:$lifecycle_version",
+                    'lifecycle_viewmodel'      : "android.arch.lifecycle:viewmodel:$lifecycle_version",
+                    'lifecycle_livedata'       : "android.arch.lifecycle:livedata:$lifecycle_version",
+                    'lifecycle_runtime'        : "android.arch.lifecycle:runtime:$lifecycle_version",
+                    'lifecycle_compiler'       : "android.arch.lifecycle:compiler:$lifecycle_version",
+                    'lifecycle_java8'          : "android.arch.lifecycle:common-java8:$lifecycle_version",
+                    'lifecycle_reactivestreams': "android.arch.lifecycle:reactivestreams:$lifecycle_version",
+            ],
+            'javapoet': "com.squareup:javapoet:1.11.1",
+    ]
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath deps.build.gradle_plugin
+        classpath deps.build.kotlin_plugin
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

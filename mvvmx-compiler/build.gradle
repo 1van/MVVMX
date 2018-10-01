@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.1van'
+
+dependencies {
+    implementation project(':mvvmx-annotations')
+    implementation deps.javapoet
+    implementation deps.auto.common
+    compileOnly deps.auto.service
+}

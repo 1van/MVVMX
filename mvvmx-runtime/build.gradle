@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.1van'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+}
+
+dependencies {
+    api project(':mvvmx-annotations')
+    api deps.arch.lifecycle_extensions
+    api deps.android.support.fragment
+}

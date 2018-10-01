@@ -1,0 +1,1 @@
+include ':sample-java', ':sample-kotlin', ':mvvmx-annotations', ':mvvmx-compiler', ':mvvmx-runtime'
