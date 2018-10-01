@@ -35,7 +35,7 @@ dependencies {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MVVMX.bind(this);
-        binding.setViewModel(viewModel);
+//        binding.setViewModel(viewModel);
     }
 ```
 ### Fragment(Kotlin)
@@ -48,7 +48,7 @@ dependencies {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         MVVMX.bind(this, inflater, container)
-        binding.viewModel = viewModel
+//        binding.viewModel = viewModel
         return binding.root
     }
 ```
