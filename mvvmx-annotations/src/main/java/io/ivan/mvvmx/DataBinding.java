@@ -11,6 +11,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface DataBinding {
     @LayoutRes int value();
-
-    int BR() default 0;
 }

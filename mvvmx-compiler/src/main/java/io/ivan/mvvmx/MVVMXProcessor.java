@@ -42,7 +42,6 @@ public final class MVVMXProcessor extends AbstractProcessor {
     private static final ClassName CLASSNAME_DataBindingUtil = ClassName.get("android.databinding", "DataBindingUtil");
 
     private HashMap<TypeElement, MethodSpec.Builder> builderMap = new HashMap<>();
-    private HashMap<TypeElement, Name> viewModelNameMap = new HashMap<>();
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
@@ -107,7 +106,6 @@ public final class MVVMXProcessor extends AbstractProcessor {
                 }
 
                 Name viewModelName = variableElement.getSimpleName();
-                viewModelNameMap.put(typeElement, viewModelName);
 
                 MethodSpec.Builder builder = createTypeBuilder(typeElement);
                 builder.addStatement("target.$L = $T.of(target).get($T.class)",
@@ -130,9 +128,7 @@ public final class MVVMXProcessor extends AbstractProcessor {
                 }
 
                 Name dataBindingName = variableElement.getSimpleName();
-                Name viewModelName = viewModelNameMap.get(typeElement);
                 int layoutId = variableElement.getAnnotation(DataBinding.class).value();
-                int brId = variableElement.getAnnotation(DataBinding.class).BR();
 
                 TypeMirror type = typeElement.asType();
                 TypeMirror activityType = processingEnv.getElementUtils().getTypeElement("android.support.v4.app.FragmentActivity").asType();
@@ -145,9 +141,6 @@ public final class MVVMXProcessor extends AbstractProcessor {
                     builder.addParameter(CLASSNAME_LayoutInflater, "inflater")
                             .addParameter(CLASSNAME_ViewGroup, "container")
                             .addStatement("target.$L = $T.inflate(inflater, $L, container, false)", dataBindingName, CLASSNAME_DataBindingUtil, layoutId);
-                }
-                if (viewModelName != null && brId > 0) {
-                    builder.addStatement("target.$L.setVariable($L, target.$L)", dataBindingName, brId, viewModelName);
                 }
             }
 

@@ -13,13 +13,14 @@ public class MainActivity extends AppCompatActivity {
     @ViewModel
     MainViewModel viewModel;
 
-    @DataBinding(value = R.layout.activity_main, BR = 1)
+    @DataBinding(value = R.layout.activity_main)
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MVVMX.bind(this);
+        binding.setViewModel(viewModel);
     }
 
 }

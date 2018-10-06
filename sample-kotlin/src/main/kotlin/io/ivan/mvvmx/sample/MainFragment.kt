@@ -19,12 +19,13 @@ class MainFragment : Fragment() {
     @ViewModel
     lateinit var viewModel: MainViewModel
 
-    @DataBinding(R.layout.main_fragment, BR = 1)
+    @DataBinding(R.layout.main_fragment)
     lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         MVVMX.bind(this, inflater, container)
+        binding.viewModel = viewModel
         return binding.root
     }
 
